@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc libFLReader.a  CMakeFiles/FLReader.dir/regex.c.o CMakeFiles/FLReader.dir/Stack.c.o CMakeFiles/FLReader.dir/xmalloc.c.o CMakeFiles/FLReader.dir/FLScan.main.c.o CMakeFiles/FLReader.dir/FLScan.tab.c.o CMakeFiles/FLReader.dir/lex.fl.c.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib libFLReader.a

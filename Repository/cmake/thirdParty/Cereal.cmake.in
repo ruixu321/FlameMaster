@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 2.8.12)
+ 
+project(cereal CXX)
+ 
+include(ExternalProject)
+ExternalProject_Add(cereal
+  GIT_REPOSITORY    https://github.com/USCiLab/cereal.git
+  GIT_TAG           master
+  PREFIX            ${INSTALL_THIRDPARTY_DIR}/cereal
+  INSTALL_DIR       ${INSTALL_THIRDPARTY_DIR}/cereal
+  BUILD_COMMAND     ""
+  INSTALL_COMMAND     ""
+  CMAKE_ARGS
+    -DCMAKE_INSTALL_PREFIX:PATH=${INSTALL_THIRDPARTY_DIR}/cereal/
+)

@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 2.8.12)
+
+file(DOWNLOAD 
+  https://sourceforge.net/projects/winflexbison/files/win_flex_bison-latest.zip 
+  ${INSTALL_THIRDPARTY_DIR}/winflexbison/winflexbison.zip
+  SHOW_PROGRESS)
+
+execute_process(
+    COMMAND ${CMAKE_COMMAND} -E tar xzf ${INSTALL_THIRDPARTY_DIR}/winflexbison/winflexbison.zip
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/someSubdirectory
+    )

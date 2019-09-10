@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc libNewton.a  CMakeFiles/Newton.dir/AdaptiveGrid.C.o CMakeFiles/Newton.dir/Newton.C.o CMakeFiles/Newton.dir/NewtonUt.C.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib libNewton.a

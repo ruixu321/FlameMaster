@@ -1,0 +1,106 @@
+# - Config file for the ListTool package
+# It defines the following variables:
+
+#  ListTool_INCLUDE_DIRS               - include directories for Tools public headers
+#  ListTool_LIBS_DIRS                  - location of the ListTool libraries (files if static libraries are used)
+#  ListTool_BIN_DIR                    - location of the ListTool (files if static libraries are used)
+#  ListTool_VERSION                    - version of the library package
+#  ListTool_ConfigPackageLocation      - location of the ListToolConfig.cmake and ListToolConfigVersion.cmake files
+
+# Imported Targets:
+#  ListTool_LIBRARIES           - (all) libraries one might want to link against (consider specific 
+#                                 libraries below)
+#  ListTool_BINARY              - ListTool binary for reformating FlameMaster output
+
+@PACKAGE_INIT@
+
+find_package(FlameMasterLibs REQUIRED HINTS ${PACKAGE_PREFIX_DIR}) # try FlameMasterLibs from the same installation
+
+set(cfg_hint "The problem is most likely that the generation of @PROJECT_NAME@Config.cmake in Tools/@PROJECT_NAME@/CMakeLists.txt is not up-to-date.")
+set(@PROJECT_NAME@_VERSION "@ListTool_VERSION@")
+message("-- Found @PROJECT_NAME@, Version ${@PROJECT_NAME@_VERSION}")
+if(@set_check@)
+	set_and_check(@PROJECT_NAME@_INCLUDE_DIRS "@PACKAGE_INSTALL_INCLUDE_DIR@")
+	set_and_check(@PROJECT_NAME@_LIBS_DIRS "@PACKAGE_INSTALL_LIB_DIR@")
+	set_and_check(@PROJECT_NAME@_BIN_DIR "@PACKAGE_INSTALL_BIN_DIR@")
+	set_and_check(@PROJECT_NAME@_ConfigPackageLocation "@PACKAGE_ConfigPackageLocation@")
+	if (NOT PACKAGE_PREFIX_DIR STREQUAL "")
+		message("-- Using '@PROJECT_NAME@' from '${PACKAGE_PREFIX_DIR}'")
+	endif()
+else()
+	# check include directory (should already exist, since build config will not be installed)
+	FOREACH(directory ${@PROJECT_NAME@_src_header_direcotries})
+		if(NOT EXISTS "${directory}")
+	    	message(FATAL_ERROR "Directory from '${@PROJECT_NAME@_src_header_direcotries}' not found: ${direcotry}")
+		endif()
+	ENDFOREACH()
+	set(@PROJECT_NAME@_INCLUDE_DIRS "@ListTool_src_header_direcotries@")
+	# check again when find_package is used
+	if(@PROJECT_NAME@_INCLUDE_DIRS STREQUAL "")
+		message(FATAL_ERROR "@PROJECT_NAME@_INCLUDE_DIRS should contain source header directories, but it is empty."
+							" ${cfg_hint}")
+	endif()
+	FOREACH(directory ${@PROJECT_NAME@_INCLUDE_DIRS})
+		if(NOT EXISTS "${directory}")
+	    	message(FATAL_ERROR "Directory from '@PROJECT_NAME@_INCLUDE_DIRS' not found: ${direcotry}"
+					"It seems like this build directory cannot find the source directory of the @PROJECT_NAME@ anymore!"
+					" Did you change the location of the build or the source tree after you executed cmake?"
+					" ${cfg_hint}")
+		endif()
+	ENDFOREACH()
+	# library directory (cannot be checked at configuration time)
+	set(@PROJECT_NAME@_LIBS_DIRS "@build_locs@")
+	# check when find_package is used
+	if(@PROJECT_NAME@_LIBS_DIRS STREQUAL "")
+		message(FATAL_ERROR "@PROJECT_NAME@_LIBS_DIRS should contain library directories, but it is empty."
+							" ${cfg_hint}")
+	endif()
+	FOREACH(file ${@PROJECT_NAME@_LIBS_DIRS})
+		if(NOT EXISTS "${file}")
+	    	message(FATAL_ERROR "Directory from '@PROJECT_NAME@_LIBS_DIRS' not found: ${file}"
+					"It seems like this build directory does not contain expected directories or files!"
+					" ${cfg_hint}")
+		endif()
+	ENDFOREACH()
+	# set binary/binaries
+	set(@PROJECT_NAME@_BIN_DIR "@exe_listtool_locations@")
+	FOREACH(file ${ListTool_BIN_DIR})
+		if(NOT EXISTS "${file}")
+	    	message(FATAL_ERROR "Directory from '@PROJECT_NAME@_BIN_DIR' not found: ${file}"
+					"It seems like this build directory does not contain the expected executable!"
+					" ${cfg_hint}")
+		endif()
+	ENDFOREACH()
+	set_and_check(@PROJECT_NAME@_ConfigPackageLocation "@PACKAGE_ConfigPackageLocation@")
+	message("-- Using '@PROJECT_NAME@' from a build tree")
+	if (NOT @PROJECT_NAME@_LIBS_DIRS STREQUAL "")
+		message("\t libraries:      '${@PROJECT_NAME@_LIBS_DIRS}'")
+	endif()
+	if (NOT @PROJECT_NAME@_INCLUDE_DIRS STREQUAL "")
+		message("\t public headers: '${@PROJECT_NAME@_INCLUDE_DIRS}'")
+	endif()
+	if (NOT @PROJECT_NAME@_BIN_DIR STREQUAL "")
+		message("\t binary dir.:    '${@PROJECT_NAME@_BIN_DIR}'")
+	endif()
+	if (NOT @PROJECT_NAME@_ConfigPackageLocation STREQUAL "")
+		message("\t target import:  '${@PROJECT_NAME@_ConfigPackageLocation}/@PROJECT_NAME@Targets.cmake'")
+	endif()
+endif()
+
+include(${@PROJECT_NAME@_ConfigPackageLocation}/@PROJECT_NAME@Targets.cmake)
+set(@PROJECT_NAME@_LIBRARIES @LTnamespace@FLReader @LTnamespace@WSS @LTnamespace@List)
+set(@PROJECT_NAME@_BINARY @LTnamespace@ListTool)
+foreach(t ${@PROJECT_NAME@_LIBRARIES})
+	if(NOT TARGET ${t})
+		message(FATAL_ERROR "Expected target does not exist: '${t}'\n"
+			" Note that targets are case sensitive."
+			" ${cfg_hint}")
+	endif()
+endforeach()
+foreach(t ${@PROJECT_NAME@_BINARY})
+	if(NOT TARGET ${t})
+		message(FATAL_ERROR "Expected target does not exist: '${t}'\n"
+			" Note that targets are case sensitive."
+			" ${cfg_hint}")
+	endif()
+endforeach()

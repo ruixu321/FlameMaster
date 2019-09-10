@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 2.8.12)
+ 
+project(sundials C)
+ 
+include(ExternalProject)
+ExternalProject_Add(sundials
+  URL               http://computation.llnl.gov/projects/sundials/download/sundials-3.0.0.tar.gz
+  PREFIX            ${INSTALL_THIRDPARTY_DIR}/sundials
+  INSTALL_DIR       ${INSTALL_THIRDPARTY_DIR}/sundials
+  CMAKE_ARGS
+    -DCMAKE_INSTALL_PREFIX:PATH=${INSTALL_THIRDPARTY_DIR}/sundials/ 
+    -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} 
+    -DBUILD_ARKODE=OFF 
+    -DBUILD_SHARED_LIBS=OFF 
+    -Wno-dev
+)

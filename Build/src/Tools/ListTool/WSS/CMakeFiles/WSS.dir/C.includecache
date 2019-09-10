@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/ruixu/Documents/Flamelet/flamemaster/FlameMaster/Repository/src/Tools/ListTool/WSS/WSS.c
+stdio.h
+-
+stdlib.h
+-
+alligator.h
+/Users/ruixu/Documents/Flamelet/flamemaster/FlameMaster/Repository/src/Tools/ListTool/WSS/alligator.h
+WSS.h
+/Users/ruixu/Documents/Flamelet/flamemaster/FlameMaster/Repository/src/Tools/ListTool/WSS/WSS.h
+
+/Users/ruixu/Documents/Flamelet/flamemaster/FlameMaster/Repository/src/Tools/ListTool/WSS/WSS.h
+alligator.h
+/Users/ruixu/Documents/Flamelet/flamemaster/FlameMaster/Repository/src/Tools/ListTool/WSS/alligator.h
+jgTypes.h
+/Users/ruixu/Documents/Flamelet/flamemaster/FlameMaster/Repository/src/Tools/ListTool/WSS/jgTypes.h
+
+/Users/ruixu/Documents/Flamelet/flamemaster/FlameMaster/Repository/src/libraries/Alligator/alligator.h
+
+/Users/ruixu/Documents/Flamelet/flamemaster/FlameMaster/Repository/src/libraries/ArrayMan/jgTypes.h
+

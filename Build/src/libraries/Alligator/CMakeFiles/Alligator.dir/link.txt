@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc libAlligator.a  CMakeFiles/Alligator.dir/alligator.c.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib libAlligator.a

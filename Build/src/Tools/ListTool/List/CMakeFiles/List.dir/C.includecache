@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/ruixu/Documents/Flamelet/flamemaster/FlameMaster/Repository/src/Tools/ListTool/List/List.c
+string.h
+-
+stdlib.h
+-
+string.h
+-
+List.h
+/Users/ruixu/Documents/Flamelet/flamemaster/FlameMaster/Repository/src/Tools/ListTool/List/List.h
+
+/Users/ruixu/Documents/Flamelet/flamemaster/FlameMaster/Repository/src/Tools/ListTool/List/List.h
+alligator.h
+/Users/ruixu/Documents/Flamelet/flamemaster/FlameMaster/Repository/src/Tools/ListTool/List/alligator.h
+
+/Users/ruixu/Documents/Flamelet/flamemaster/FlameMaster/Repository/src/libraries/Alligator/alligator.h
+

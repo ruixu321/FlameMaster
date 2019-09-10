@@ -1,0 +1,50 @@
+# - Config file for the CreateBinFile package
+# It defines the following variables:
+
+#  CreateBinFile_BIN_DIR                      - location of CreateBinFile
+#  CreateBinFile_VERSION                      - version of the binary
+#  CreateBinFile_ConfigPackageLocation        - location of the configuration files ( = CreateFileBin_DIR)
+# Imported Targets:
+#  CreateBinFile_BINS                         - (all) executable targets
+#  CreateBinFile::CreateBinFile               - executable target
+
+@PACKAGE_INIT@
+set(cfg_hint "The problem is most likely that the generation of @PROJECT_NAME@Config.cmake in @PROJECT_NAME@/CMakeLists.txt is not up-to-date.")
+set(CreateBinFile_VERSION "@CreateBinFile_VERSION@")
+message("-- Found CreateBinFile, Version ${CreateBinFile_VERSION}")
+if(@set_check@)
+	set_and_check(CreateBinFile_BIN_DIR "@PACKAGE_INSTALL_BIN_DIR@")
+	set_and_check(CreateBinFile_ConfigPackageLocation "@PACKAGE_ConfigPackageLocation@")
+	if (NOT PACKAGE_PREFIX_DIR STREQUAL "")
+		message("-- Using 'CreateBinFile' from '${PACKAGE_PREFIX_DIR}'")
+	endif()
+else()
+	set(CreateBinFile_BIN_DIR "@CreateBinFileDirectory@")
+	# check when find_package is used whether directory exists
+	if(NOT EXISTS "${CreateBinFile_BIN_DIR}")
+		message(FATAL_ERROR "CreateBinFile_BIN_DIR not found: ${CreateBinFile_BIN_DIR}"
+							" ${cfg_hint}")
+	endif()
+	set_and_check(CreateBinFile_ConfigPackageLocation "@PACKAGE_ConfigPackageLocation@")
+	message("-- Using 'CreateBinFile' from a build tree")
+	if (NOT CreateBinFile_BIN_DIR STREQUAL "")
+		message("\t binary dir.:       '${CreateBinFile_BIN_DIR}'")
+	endif()
+	if (NOT CreateBinFile_ConfigPackageLocation STREQUAL "")
+		message("\t target import:     '${CreateBinFile_ConfigPackageLocation}/CreateBinFileTargets.cmake'")
+	endif()
+	if (NOT CreateBinFile_ConfigPackageLocation STREQUAL "")
+		message("\t package location:  '${CreateBinFile_ConfigPackageLocation}'")
+	endif()
+endif()
+
+include(${CreateBinFile_ConfigPackageLocation}/CreateBinFileTargets.cmake)
+# check whether configuration file is still up to date
+set(CreateBinFile_BINS @CreateBinFileNamespace@CreateBinFile)
+foreach(t ${CreateBinFile_BINS})
+	if(NOT TARGET ${t})
+		message(FATAL_ERROR "Expected target does not exist: '${t}'\n"
+			" Note that targets are case sensitive."
+			" ${cfg_hint}")
+	endif()
+endforeach()

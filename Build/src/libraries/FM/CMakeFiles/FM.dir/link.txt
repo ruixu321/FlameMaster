@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc libFM.a  CMakeFiles/FM.dir/Interrupt.c.o CMakeFiles/FM.dir/LTBody.c.o CMakeFiles/FM.dir/LTHeader.c.o CMakeFiles/FM.dir/LTUtilities.c.o CMakeFiles/FM.dir/ReadStartProfile.c.o CMakeFiles/FM.dir/Spline.c.o CMakeFiles/FM.dir/MapMan.C.o CMakeFiles/FM.dir/TofZ.c.o CMakeFiles/FM.dir/BetaPDF.c.o CMakeFiles/FM.dir/SmallNewton.c.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib libFM.a

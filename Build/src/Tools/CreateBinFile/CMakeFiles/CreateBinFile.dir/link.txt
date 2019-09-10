@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/cc  -pedantic -std=c11 -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/CreateBinFile.dir/CreateBinFile.c.o CMakeFiles/CreateBinFile.dir/ThermoProperties.c.o  -o CreateBinFile -lm ../../libraries/Alligator/libAlligator.a ../../libraries/ArrayMan/libArrayMan.a -lm ../../libraries/Alligator/libAlligator.a 
